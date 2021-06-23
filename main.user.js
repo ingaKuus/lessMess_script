@@ -92,6 +92,15 @@
         }
     }
 
+    // назойливая кнопка пожертвования на сайте Perspektivy.ru
+    if (/https:\/\/perspektivy.ru/.test(w.location.href)) {
+        let btn = document.getElementById('goody_widget_container');
+        if (btn) {
+            btn.remove();
+            console.log('lessMess Perspektivy.ru');
+        }
+    }
+
     function adjustText(block, width, doLineHeight, font_size, font_family) {
         if (!block) return;
 
