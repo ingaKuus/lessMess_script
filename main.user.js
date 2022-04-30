@@ -100,6 +100,17 @@
             console.log('lessMess Perspektivy.ru');
         }
     }
+    
+    // удаление блока предложения подписки и блока рекламы на Yandex.Music
+    if (/https:\/\/music.yandex.ru/.test(w.location.href)) {
+        let blocks = [document.getElementsByClassName('bar-below_plus')[0], document.getElementsByClassName('d-overhead')[0]];
+        if (blocks) {
+            blocks.forEach(block => {
+                block.remove();
+            });
+            console.log('lessMess Yandex.Music');
+        }
+    }
 
     function adjustText(block, width, doLineHeight, font_size, font_family) {
         if (!block) return;
