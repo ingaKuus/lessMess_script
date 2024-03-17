@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         lessMess
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  some little shit I'm sick of doing manually
 // @author       the universe
 // @match        https://*/*
@@ -110,6 +110,15 @@
             });
             console.log('lessMess Yandex.Music');
         }
+    }
+
+    // удаление рекламы справа от результатов поиска yandex.ru
+    if (/https:\/\/yandex.ru/.test(w.location.href)) {
+        const ads = document.querySelectorAll("AdvRsya-Slot");
+        Array.from(ads).forEach(ad => {
+            ad.remove();
+        });
+        console.log('lessMess yandex.ru');
     }
 
     function adjustText(block, width, doLineHeight, font_size, font_family) {
