@@ -114,7 +114,7 @@
 
     // удаление рекламы справа от результатов поиска yandex.ru
     if (/https:\/\/yandex.ru/.test(w.location.href)) {
-        const ads = document.querySelectorAll("AdvRsya-Slot");
+        const ads = document.querySelectorAll(".AdvRsya-Slot");
         Array.from(ads).forEach(ad => {
             ad.remove();
         });
