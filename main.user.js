@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         lessMess
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @description  some little shit I'm sick of doing manually
 // @author       the universe
 // @match        https://*/*
