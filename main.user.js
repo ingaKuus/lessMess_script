@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         lessMess
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.2.2
 // @description  some little shit I'm sick of doing manually
 // @author       the universe
 // @match        https://*/*
@@ -13,50 +13,19 @@
     'use strict';
     let w = window;
 
-    // автоскрытие шапки на mangalib.me. переключение шапки на кнопку "="
-    if (/https:\/\/mangalib.me/.test(w.location.href)) {
-        let header = document.getElementsByClassName('header_reader')[0];
-        let likePanel = document.getElementsByClassName('reader-review')[0];
-        let isHidden = false;
-
-        if (header) {
-            toggleHeader();
-
-            document.onkeyup = key => {
-                if (key.code === 'Equal' && header) {
-                    toggleHeader();
-                }
-            };
+    // Скрытие водяного знака HolaVPN
+    const hideHolaWatermark = () => {
+        const watermark = document.getElementById("_hola_popup_iframe__");
+        if (!watermark || watermark.style.zIndex === "-1") {
+            return;
         }
+        watermark.style.zIndex = -1;
+        watermark.style.visibility = "hidden";
 
-        function toggleHeader() {
-            if (!isHidden) {
-                header.style.visibility = 'hidden';
-                likePanel.style.display = 'none';
-                isHidden = true;
-            } else {
-                header.style.visibility = 'visible';
-                likePanel.style.display = 'flex';
-                isHidden = false;
-            }
-            console.log('header toggled.');
-        }
-
-        // удаление анимированного шарика у кнопки "правила"
-        /*let redBalloonDeletion = setInterval(() => {
-            let isShown = !document.getElementById('comments');
-            if (isShown) {
-                let redBalloon = document.getElementsByClassName('rules-btn__dot')[0];
-                if (redBalloon) {
-                    redBalloon.remove();
-                }
-
-                clearInterval(redBalloonDeletion);
-            }
-        }, 500);*/
-
-        console.log('lessMess mangalib.me');
+        console.log("lessMess Hola Watermark");
     }
+    const holaInterval = setInterval(hideHolaWatermark, 1 * 1000);
+    setTimeout(() => clearInterval(holaInterval), 20 * 1000);
 
     if (/https:\/\/www.rulit.me\/books/.test(w.location.href)) {
         let textBlock = document.getElementsByClassName('page_content')[0];
@@ -74,30 +43,12 @@
         console.log('lessMess spiritual.ru');
     }
 
-    // какая-то хрень справа внизу от результатов поиска duckduckgo
-    if (/https:\/\/duckduckgo.com/.test(w.location.href)) {
-        let noisyBlock = document.getElementsByClassName('js-serp-bottom-right')[0];
-        if (noisyBlock) {
-            noisyBlock.remove();
-            console.log('lessMess duckduckgo.com');
-        }
-    }
-
     // рекламное объявление справа от плеера на ютубе
     if (/https:\/\/www.youtube.com/.test(w.location.href)) {
         let ad = document.getElementById('player-ads');
         if (ad) {
             ad.remove();
             console.log('lessMess youtube');
-        }
-    }
-
-    // назойливая кнопка пожертвования на сайте Perspektivy.ru
-    if (/https:\/\/perspektivy.ru/.test(w.location.href)) {
-        let btn = document.getElementById('goody_widget_container');
-        if (btn) {
-            btn.remove();
-            console.log('lessMess Perspektivy.ru');
         }
     }
     
